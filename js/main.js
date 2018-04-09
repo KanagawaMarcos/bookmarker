@@ -40,11 +40,38 @@ function saveBookmark(e) {
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   }
 
-  //Prevent form from submiting
+  //  Update the html page
+  fetchBookmarks();
+
+  //  Prevent form from submiting
   e.preventDefault();
 }
 
-function fetchBookmarks(){
+//  Delete a bookmark
+function deleteBookmark(url) {
+
+  //  Get all bookmarks
+  var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+
+  //  Iterate through all bookmarks
+  for (var i = 0; i < bookmarks.length; i++) {
+
+    //  If the url matchs some, it deletes it
+    if (bookmarks[i].url == url) {
+
+      //  Remove the bookmark
+      bookmarks.splice(i, 1);
+    }
+  }
+
+  //  Updates the bookmarks in the local storage again
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+
+  //  Update the html page
+  fetchBookmarks();
+}
+
+function fetchBookmarks() {
 
   //  Get all bookmarks
   var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
@@ -53,12 +80,12 @@ function fetchBookmarks(){
   var bookmarksResult = document.getElementById('bookmarksResults');
 
   //  Loop through all bookmarks and output them
-  for(var i = 0; i < bookmarks.length; i++){
+  for (var i = 0; i < bookmarks.length; i++) {
 
     var name = bookmarks[i].name;
     var url = bookmarks[i].url;
 
-    bookmarksResult.innerHTML += '<div class="well">'+'<h3>'+name+'<a class="btn btn-default" target="__blank" href="'+url+'">Visitar</a>'+'</h3>';
+    bookmarksResult.innerHTML += '<div class="well">' + '<h3>' + name + '<a class="btn btn-default" target="__blank" href="' + url + '">Visitar</a>' + '<a onclick="deleteBookmark(\'' + url + '\')" class="btn btn-danger" href="#">deletar</a>' + '</h3>';
   }
 
 
