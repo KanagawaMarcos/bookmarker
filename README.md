@@ -1,5 +1,5 @@
 # Bookmarker
-A simple bookmarker using vanilla javascript. 
+A simple bookmarker using vanilla javascript. It's real porpuse was to learn how to use local storage from JavaScript, not really a big deal.
 
 ### How to use
 Open the **index.html** with any major web browser and you are ready to go. 
